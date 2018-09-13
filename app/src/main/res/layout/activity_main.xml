@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <RadioGroup
+        android:id="@+id/main_group"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#f8f8f8"
+        android:orientation="horizontal"
+        android:paddingBottom="2dp">
+
+        <RadioButton
+            android:id="@+id/radio_home"
+            style="@style/radio_button"
+            android:drawableTop="@drawable/home_bg_selector"
+            android:text="第一" />
+
+        <RadioButton
+            android:id="@+id/radio_finance"
+            style="@style/radio_button"
+            android:drawableTop="@drawable/home_bg_selector"
+            android:text="第二" />
+
+        <RadioButton
+            android:id="@+id/radio_my"
+            style="@style/radio_button"
+            android:drawableTop="@drawable/home_bg_selector"
+            android:text="第三" />
+    </RadioGroup>
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+</RelativeLayout>

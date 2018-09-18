@@ -2,6 +2,7 @@ package lzw.com.myapplication.net
 
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
+import lzw.com.myapplication.bean.DataResultException
 
 abstract class SimpleSubscriber<T> : Observer<T> {
     constructor()
@@ -28,12 +29,14 @@ abstract class SimpleSubscriber<T> : Observer<T> {
     }
 
     override fun onError(e: Throwable) {
-        error("请求异常")
-
         if (mDisposable != null && !mDisposable!!.isDisposed) {
             mDisposable!!.dispose()
         }
-
+        if(e is DataResultException){
+            error(e.data!!)
+        }else{
+            error("请求异常")
+        }
     }
 
     abstract fun success(t: T)

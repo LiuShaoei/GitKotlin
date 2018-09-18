@@ -9,4 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="center fragment"/>
+    <TextView
+        android:gravity="center"
+        android:text="扫一扫"
+        android:id="@+id/saoyisao"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
 </LinearLayout>

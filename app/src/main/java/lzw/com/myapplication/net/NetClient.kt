@@ -14,11 +14,16 @@ class NetClient {
     companion object {
         val time: Long = 30 * 1000
         val base_url = "http://47.106.34.246:9082/"
+        val chaowei_url = "http://192.168.1.150:8083"
+
+        val apiService: ApiService = create(chaowei_url)!!.create(ApiService::class.java)
+
         private fun create(url: String): Retrofit? {
             return Retrofit.Builder()
                     .baseUrl(url)
                     .client(getHttpClient())
-                    .addConverterFactory(GsonConverterFactory.create())
+                    //.addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(MyConverterFavtory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build()
         }
@@ -44,6 +49,6 @@ class NetClient {
 
         }
 
-        val apiService: ApiService = create(base_url)!!.create(ApiService::class.java)
+
     }
 }

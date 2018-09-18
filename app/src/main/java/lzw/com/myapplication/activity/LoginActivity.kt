@@ -8,8 +8,10 @@ import butterknife.BindView
 import butterknife.OnClick
 import kotlinx.android.synthetic.main.activity_login.*
 import lzw.com.myapplication.base.BaseActivity
-import lzw.com.myapplication.bean.Data
+
 import lzw.com.myapplication.bean.LoginBean
+import lzw.com.myapplication.bean.LoginData
+import lzw.com.myapplication.bean.LoginUser
 import lzw.com.myapplication.contract.LoginContract
 import lzw.com.myapplication.presenter.LoginPresenter
 import lzw.com.myapplication.utils.SharePrefUtils
@@ -31,13 +33,12 @@ class LoginActivity : BaseActivity(), LoginContract.View {
         presenter = LoginPresenter(this)
     }
 
-    override fun loginSuccess(bean: LoginBean<Data>) {
-
+    override fun loginSuccess(bean: LoginBean<LoginData<LoginUser>>) {
         var token by SharePrefUtils("access_token", "")
         token = bean.data.access_token
         var firstEnter by SharePrefUtils("firstEnter", false)
         firstEnter = true
-
+        toast("登陆成功")
         //登陆成功,跳转主页
         var intent = Intent()
         intent.setClass(this, MainActivity::class.java)
@@ -47,7 +48,6 @@ class LoginActivity : BaseActivity(), LoginContract.View {
 
     override fun error(errMsg: String) {
     }
-
 
     override fun getPhone(): EditText {
         return mPhone
@@ -60,18 +60,7 @@ class LoginActivity : BaseActivity(), LoginContract.View {
     override lateinit var presenter: LoginContract.Presenter
 
     override fun initData() {
-
         mTitle.text = "欢迎登陆"
-
-        var token by SharePrefUtils("access_token", "")
-        if (TextUtils.isEmpty(token)) {
-            //没有token值需要登录
-        } else {
-            //不需要登录
-            var intent = Intent()
-            intent.setClass(this, MainActivity::class.java)
-            startActivity(intent)
-        }
     }
     @OnClick(R.id.login)
     fun onClick(view: View) {

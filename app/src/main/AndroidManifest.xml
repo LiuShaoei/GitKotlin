@@ -10,14 +10,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="lzw.com.myapplication.activity.LoginActivity">
+        <activity android:name="lzw.com.myapplication.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="lzw.com.myapplication.activity.MainActivity"/>
+        <activity android:name="lzw.com.myapplication.activity.LoginActivity"/>
+        <activity android:name="lzw.com.myapplication.activity.ScanerCodeActivity"/>
+        <activity android:name="lzw.com.myapplication.activity.SweepLoginActivity"/>
     </application>
+
 
 </manifest>

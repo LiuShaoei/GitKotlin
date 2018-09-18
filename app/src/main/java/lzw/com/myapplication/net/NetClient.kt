@@ -15,8 +15,9 @@ class NetClient {
         val time: Long = 30 * 1000
         val base_url = "http://47.106.34.246:9082/"
         val chaowei_url = "http://192.168.1.150:8083"
-
-        val apiService: ApiService = create(chaowei_url)!!.create(ApiService::class.java)
+        val home_url = "http://192.168.5.189:8083"
+        val service_url = "http://118.89.51.48:8083"
+        val apiService: ApiService = create(service_url)!!.create(ApiService::class.java)
 
         private fun create(url: String): Retrofit? {
             return Retrofit.Builder()

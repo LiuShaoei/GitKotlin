@@ -43,7 +43,7 @@ public class MyConverterFavtory extends Converter.Factory {
     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations,
                                                             Retrofit retrofit) {
         TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
-        return new MyGsonResponseBodyConverter<>(gson, adapter);
+        return new MyGsonResponseBodyConverter<>(gson, type);
     }
 
     @Override

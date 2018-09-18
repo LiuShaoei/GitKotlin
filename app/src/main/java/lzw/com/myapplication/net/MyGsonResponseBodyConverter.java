@@ -5,6 +5,7 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 
 import lzw.com.myapplication.bean.BaseResponseBean;
 import lzw.com.myapplication.bean.DataResultException;
@@ -17,11 +18,11 @@ import retrofit2.Converter;
 
 public class MyGsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
     private final Gson gson;
-    private final TypeAdapter<T> adapter;
+    private Type type;
 
-    MyGsonResponseBodyConverter(Gson gson, TypeAdapter<T> adapter) {
+    MyGsonResponseBodyConverter(Gson gson, Type type) {
         this.gson = gson;
-        this.adapter = adapter;
+        this.type = type;
     }
 
     @Override
@@ -30,11 +31,9 @@ public class MyGsonResponseBodyConverter<T> implements Converter<ResponseBody, T
             String response = value.string();
             BaseResponseBean bean = gson.fromJson(response, BaseResponseBean.class);
             if (bean.getCode() != 0) {
-                throw new DataResultException(bean.getMsg(), bean.getCode(), bean.getData());
+                throw new DataResultException(bean.getMsg(), bean.getCode(), (String)bean.getData());
             }
-
-            JsonReader jsonReader = gson.newJsonReader(value.charStream());
-            return adapter.read(jsonReader);
+            return  gson.fromJson(response, type);
         } finally {
             value.close();
         }
